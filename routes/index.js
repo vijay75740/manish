@@ -8,44 +8,25 @@ router.get('/', function (req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
-router.post('/telegram_post', function (req, res, next) {
+router.get('/telegram_post', function (req, res, next) {
   async.waterfall([
     function (nextCall) {
-      // req.checkBody('title', "title reqired").notEmpty();
-      // req.checkBody('sellprice', "sellprice reqired").notEmpty();
-      // req.checkBody('regularprice', "regularprice reqired").notEmpty();
-      // req.checkBody('productlink', "productlink reqired").notEmpty();
-      // req.checkBody('imageurl', "imageurl reqired").notEmpty();
-
-      req.checkBody('url', "url reqired").notEmpty();
-      var error = req.validationErrors();
-      if (error && error.length) {
-        return nextCall({ msg: error[0].msg });
-      }
-      nextCall(null, req.body);
-    },
-    function (body, nextCall) {
-      var postarray = [];
-      var keyval = body.url.split('?')[1].split('&');
-      for (var x = 0, y = keyval.length; x < y; x += 1) {
-        postarray.push(keyval[x].split('=')[1])
-      }
       var token = '1012069743:AAHAQ-sDOZQW0Qvh3iCrRfmgI2oDTe1Cqqk';  // <= replace with yours
       var chatId = '@testchannel0112'; // <= replace with yours
 
-      var html = '🛍' + postarray[0] + '\n\n' +
-        '<b>Now  @' + postarray[1] + 'Rs.</b>\n' +
-        '<i>(Regular Price:' + postarray[2] + 'Rs.)</i>\n' +
-        '<a href=' + postarray[3] + '>' + postarray[3] + '</a>\n';
+      var html = '🛍' + req.query.title + '\n\n' +
+        '<b>Now  @' + req.query.sellprice + 'Rs.</b>\n' +
+        '<i>(Regular Price:' + req.query.regularprice + 'Rs.)</i>\n' +
+        '<a href=' + req.query.productlink + '>' + req.query.productlink + '</a>\n';
 
       var buttons = [
         [
-          { "text": "➡️ ➡️ 🛒 BUY HERE 🛒 ⬅️ ⬅️", "url": postarray[3] }
+          { "text": "➡️ ➡️ 🛒 BUY HERE 🛒 ⬅️ ⬅️", "url": req.query.productlink }
         ]
       ];
       if (html) {
         bot = new nodeTelegramBotApi(token, { polling: true });
-        bot.sendPhoto(chatId, postarray[4], {
+        bot.sendPhoto(chatId, req.query.imageurl, {
           caption: html,
           parse_mode: "HTML",
           disable_web_page_preview: true,
@@ -53,8 +34,9 @@ router.post('/telegram_post', function (req, res, next) {
             "inline_keyboard": buttons
           }
         });
-        nextCall(null, body);
+        nextCall(null, req.query);
       }
+
     },
   ], function (err, response) {
     if (err) {
