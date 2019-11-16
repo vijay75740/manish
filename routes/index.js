@@ -66,7 +66,7 @@ router.get('/telegram_posts', function (req, res, next) {
   async.waterfall([
     function (nextCall) {
       var token = '1012069743:AAHAQ-sDOZQW0Qvh3iCrRfmgI2oDTe1Cqqk';  // <= replace with yours
-      var chatId = '@testchannel0112'; // <= replace with yours
+      var chatId = '@'+req.query.chanel; // <= replace with yours
 
     
       // var html = '🛍' + req.query.title + '\n\n' +
