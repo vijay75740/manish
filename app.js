@@ -13,6 +13,13 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Credentials", true);
+  res.header('Access-Control-Allow-Origin', req.headers.origin);
+  res.header("Access-Control-Allow-Headers", "Content-Type, X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5,  Date, X-Api-Version, X-File-Name, user-access-token");
+  res.header('Access-Control-Allow-Methods', "POST, GET, PUT, DELETE, OPTIONS");
+  next();
+});
 app.use(logger('dev'));
 // app.use(express.json());
 app.use(bodyParser.json());
