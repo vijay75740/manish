@@ -119,72 +119,72 @@ router.get('/telegram', function (req, res, next) {
   })
 });
 
-// router.get('/telegram_posts', function (req, res, next) {
-//   async.waterfall([
-//     function (nextCall) {
-//       var token = '1012069743:AAHAQ-sDOZQW0Qvh3iCrRfmgI2oDTe1Cqqk';  // <= replace with yours
-//       var chatId = '@' + req.query.chanel; // <= replace with yours
-
-
-//       // var html = '🛍' + req.query.title + '\n\n' +
-//       //   '<b>Now  @' + req.query.sellprice + 'Rs.</b>\n' +
-//       //   '<i>(Regular Price:' + req.query.regularprice + 'Rs.)</i>\n' +
-//       //   '<a href='+req.query.productlink+'>'+req.query.productlink+'</a>\n';
-//       var savings = req.query.regularprice - req.query.sellprice;
-//       var savEPERCENT = Math.round(100 * savings / req.query.regularprice);
-
-//       var html = '🛍 ' + req.query.title + '\n\n' +
-//         '🚫 <b>M.R.P. : </b> ₹ ' + req.query.regularprice + '\n' +
-//         '♨️ <b style="background-color:red;">PRICE : </b> ₹ ' + req.query.sellprice + '\n' +
-//         '💰 <b>SAVINGS : </b> ₹ ' + savings + ' (' + savEPERCENT + '%)\n' +
-//         '🔗 <a href=' + req.query.productlink.text + '>' + req.query.productlink + '</a>\n' +
-//         '🚚 FREE Delivery\n\n' +
-//         // '👉 More Deals - <a href= @' + req.query.chanel + '> @' + req.query.chanel+'</a>\n'+
-//         '👉 More Deals - @' + req.query.chanel+'\n'+
-//         '🌐 Website - <a href=' + req.query.website.text + '>' + req.query.website + '</a>';
-
-
-//       // var html = 'Visko Tools 802 Home Tool Kit (3 Pieces)\n\n'+
-//       // '<b>Now  @ 116 Rs.</b>\n'+
-//       // '<i>(Regular Price: 216 Rs.)</i>\n'+
-//       // '<a href="https://amzn.to/2NCz4q0">https://amzn.to/2NCz4q0</a>\n';
-
-//       var buttons = [
-//         [
-//           // { "text": "➡️ ➡️ 🛒 BUY HERE 🛒 ⬅️ ⬅️", "url": req.query.productlink }
-//           { "text": "➡️ ➡️ 🛒 CLICK HERE TO BUY 🛒 ⬅️ ⬅️", "url": req.query.productlink }
-//         ]
-//       ];
-//       if (html) {
-//         bot = new nodeTelegramBotApi(token, { polling: true });
-//         bot.sendPhoto(chatId, req.query.imageurl, {
-//           caption: html,
-//           parse_mode: "HTML",
-//           disable_web_page_preview: true,
-//           "reply_markup": {
-//             "inline_keyboard": buttons
-//           }
-//         });
-//         nextCall(null, req.query);
-//       }
-
-//     },
-//   ], function (err, response) {
-//     if (err) {
-//       return res.send({
-//         status: err.code ? err.code : 400,
-//         message: (err && err.msg) || "someyhing went wrong"
-//       });
-//     }
-//     return res.send({
-//       status_code: 200,
-//       message: "telegrame post create sucessfully",
-//       data: response
-//     });
-//   })
-// });
-
 router.get('/telegram_posts', function (req, res, next) {
+  async.waterfall([
+    function (nextCall) {
+      var token = '1012069743:AAHAQ-sDOZQW0Qvh3iCrRfmgI2oDTe1Cqqk';  // <= replace with yours
+      var chatId = '@' + req.query.chanel; // <= replace with yours
+
+
+      // var html = '🛍' + req.query.title + '\n\n' +
+      //   '<b>Now  @' + req.query.sellprice + 'Rs.</b>\n' +
+      //   '<i>(Regular Price:' + req.query.regularprice + 'Rs.)</i>\n' +
+      //   '<a href='+req.query.productlink+'>'+req.query.productlink+'</a>\n';
+      var savings = req.query.regularprice - req.query.sellprice;
+      var savEPERCENT = Math.round(100 * savings / req.query.regularprice);
+
+      var html = '🛍 ' + req.query.title + '\n\n' +
+        '🚫 <b>M.R.P. : </b> ₹ ' + req.query.regularprice + '\n' +
+        '♨️ <b style="background-color:red;">PRICE : </b> ₹ ' + req.query.sellprice + '\n' +
+        '💰 <b>SAVINGS : </b> ₹ ' + savings + ' (' + savEPERCENT + '%)\n' +
+        '🔗 <a href=' + req.query.productlink.text + '>' + req.query.productlink + '</a>\n' +
+        '🚚 FREE Delivery\n\n' +
+        // '👉 More Deals - <a href= @' + req.query.chanel + '> @' + req.query.chanel+'</a>\n'+
+        '👉 More Deals - @' + req.query.chanel+'\n'+
+        '🌐 Website - <a href=' + req.query.website.text + '>' + req.query.website + '</a>';
+
+
+      // var html = 'Visko Tools 802 Home Tool Kit (3 Pieces)\n\n'+
+      // '<b>Now  @ 116 Rs.</b>\n'+
+      // '<i>(Regular Price: 216 Rs.)</i>\n'+
+      // '<a href="https://amzn.to/2NCz4q0">https://amzn.to/2NCz4q0</a>\n';
+
+      var buttons = [
+        [
+          // { "text": "➡️ ➡️ 🛒 BUY HERE 🛒 ⬅️ ⬅️", "url": req.query.productlink }
+          { "text": "➡️ ➡️ 🛒 CLICK HERE TO BUY 🛒 ⬅️ ⬅️", "url": req.query.productlink }
+        ]
+      ];
+      if (html) {
+        bot = new nodeTelegramBotApi(token, { polling: true });
+        bot.sendPhoto(chatId, req.query.imageurl, {
+          caption: html,
+          parse_mode: "HTML",
+          disable_web_page_preview: true,
+          "reply_markup": {
+            "inline_keyboard": buttons
+          }
+        });
+        nextCall(null, req.query);
+      }
+
+    },
+  ], function (err, response) {
+    if (err) {
+      return res.send({
+        status: err.code ? err.code : 400,
+        message: (err && err.msg) || "someyhing went wrong"
+      });
+    }
+    return res.send({
+      status_code: 200,
+      message: "telegrame post create sucessfully",
+      data: response
+    });
+  })
+});
+
+router.get('/telegram_postss', function (req, res, next) {
   async.waterfall([
     function (nextCall) {
       opHelper.execute('ItemSearch', {
@@ -194,7 +194,7 @@ router.get('/telegram_posts', function (req, res, next) {
         'ItemPage': '1',
         'ResponseGroup': 'ItemAttributes,Offers,OfferFull,Reviews,SearchBins,SalesRank,Images,Tracks,OfferListings,PromotionSummary,PromotionalTag,EditorialReview,VariationOffers,Variations'
       }).then((response) => {
-        let productUrl = response.result.ItemSearchResponse.Items.Item[0].DetailPageURL ? response.result.ItemSearchResponse.Items.Item[0].DetailPageURL : req.query.productlink;
+        let productUrl = response.result.ItemSearchResponse.Items.Item[0].DetailPageURL ? response.result.ItemSearchResponse.Items.Item[0].DetailPageURL : response.result.ItemSearchResponse.Items.MoreSearchResultsUrl;
         // let finalProductUrl = 'https://api.rebrandly.com/v1/links/new?Content-Type=application/json&apikey=4cac33db1c9140a8a9dfd6fa9f4c3510&destination=' + productUrl + '%2F&title=amzn&domain%5Bid%5D=07757180185b4e3da431e5f902b704c1&domain%5BfullName%5D=link.bestshoppingdeal.in';
 
         // console.log('response: ', response);
