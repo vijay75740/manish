@@ -140,8 +140,10 @@ router.get('/telegram_posts', function (req, res, next) {
         '🔗 <a href=' + req.query.productlink.text + '>' + req.query.productlink + '</a>\n' +
         '🚚 FREE Delivery\n\n' +
         // '👉 More Deals - <a href= @' + req.query.chanel + '> @' + req.query.chanel+'</a>\n'+
-        '👉 More Deals - @' + req.query.chanel+'\n'+
-        '🌐 Website - <a href=' + req.query.website.text + '>' + req.query.website + '</a>';
+        // '👉 More Deals - @' + req.query.chanel;
+        '👉 <a href="https://t.me/bestshoppingdeal00"> Join US for More Deals </a>\n';
+        // +'\n'+
+        // '🌐 Website - <a href=' + req.query.website.text + '>' + req.query.website + '</a>';
 
 
       // var html = 'Visko Tools 802 Home Tool Kit (3 Pieces)\n\n'+
