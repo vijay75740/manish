@@ -301,7 +301,117 @@ router.get('/telegram_postss', function (req, res, next) {
 
 
 
-router.get('/whatsapp_posts', function (req, res, next) {
+// router.get('/whatsapp_posts', function (req, res, next) {
+//   async.waterfall([
+//     function (nextCall) {
+//       console.log('req.param: ', req.query);
+     
+//       if(req.query.apiKey && req.query.productId){
+//         config.apiKey = req.query.apiKey;
+//         config.productId = req.query.productId;
+//         let requestHeaders1 = {
+//           "Content-Type": "application/json",
+//           "accept": "application/json",
+//           "x-maytapi-key": config.apiKey
+//         }
+//         request({
+//           uri: "https://api.maytapi.com/api/" + config.productId + "/listPhones",
+//           method: "GET",
+//           // body: JSON.stringify(linkRequest1),
+//           headers: requestHeaders1
+//         }, (err, response, body) => {
+//           let link = JSON.parse(body);
+//           config.phoneId = req.query.phoneId;
+//           nextCall(null, link);
+//         })
+//       }else{
+//         nextCall(null, "demo");
+//       }
+
+//     },function (body,nextCall) {
+//       let arrayGroupNumber =[
+//         {
+//           "name": "Amazon Offer Alert - 1🛍🛒🔥",
+//           "id": "916353594230-1570365608@g.us"
+//         },
+//         {
+//           "name": "Amazon Offer Alert - 2🛍🛒🔥",
+//           "id": "916353594230-1570379159@g.us"
+//         },
+//         {
+//           "name": "Amazon Offer Alert - 3🛍🛒🔥",
+//           "id": "916353594230-1570969831@g.us"
+//         },
+//         {
+//           "name": "Amazon Offer Alert - 4🛍🛒🔥",
+//           "id": "916353594230-1570971252@g.us"
+//         },
+//         {
+//           "name": "Amazon Offer Alert -5🛍🛒🔥",
+//           "id": "916353594230-1571493437@g.us"
+//         },
+//         {
+//           "name": "Amazon Offer Alert - 6🛍🛒🔥",
+//           "id": "916353594230-1571491746@g.us"
+//         },
+//         {
+//           "name": "Amazon Offer Alert - 7🛍🛒🔥",
+//           "id": "916353594230-1571491944@g.us"
+//         },
+//         {
+//           "name": "Amazon Offer Alert - 8🛍🛒🔥",
+//           "id": "916353594230-1571493106@g.us"
+//         },
+//         {
+//           "name": "Amazon Offer Alert - 9🛍🛒🔥",
+//           "id": "916353594230-1571493284@g.us"
+//         },
+//         {
+//           "name": "Amazon Offer Alert -10🛍🛒🔥",
+//           "id": "916353594230-1574959445@g.us"
+//         }
+//       ]
+
+//       for(let i =0 ; i < arrayGroupNumber.length ; i++){
+//       let requestHeaders1 = {
+//         "Content-Type": "application/json",
+//         "accept": "application/json",
+//         "x-maytapi-key": config.apiKey
+//       }
+
+//       let linkRequest1 = {
+//         "to_number": arrayGroupNumber[i].id,
+//         "type": "text",
+//         "message": req.query.message
+//       }
+
+//       request({
+//         uri: "https://api.maytapi.com/api/" + config.productId + "/"+ config.phoneId+"/sendMessage",
+//         method: "POST",
+//         body: JSON.stringify(linkRequest1),
+//         headers: requestHeaders1
+//       }, (err, response, body) => {
+//         let link = JSON.parse(body);
+//       })
+//     }
+//     nextCall(null, "final");
+//     },
+//   ], function (err, response) {
+//     if (err) {
+//       return res.send({
+//         status: err.code ? err.code : 400,
+//         message: (err && err.msg) || "someyhing went wrong"
+//       });
+//     }
+//     return res.send({
+//       status_code: 200,
+//       message: "telegrame post create sucessfully",
+//       data: response
+//     });
+//   })
+// });
+
+ter.get('/whatsapp_posts', function (req, res, next) {
   async.waterfall([
     function (nextCall) {
       console.log('req.param: ', req.query);
@@ -372,7 +482,7 @@ router.get('/whatsapp_posts', function (req, res, next) {
         }
       ]
 
-      for(let i =0 ; i < arrayGroupNumber.length ; i++){
+      // for(let i =0 ; i < arrayGroupNumber.length ; i++){
       let requestHeaders1 = {
         "Content-Type": "application/json",
         "accept": "application/json",
@@ -380,7 +490,7 @@ router.get('/whatsapp_posts', function (req, res, next) {
       }
 
       let linkRequest1 = {
-        "to_number": arrayGroupNumber[i].id,
+        "to_number": '17084352567-1495533551@g.us',
         "type": "text",
         "message": req.query.message
       }
@@ -392,10 +502,10 @@ router.get('/whatsapp_posts', function (req, res, next) {
         headers: requestHeaders1
       }, (err, response, body) => {
         let link = JSON.parse(body);
+        nextCall(null, "final");
       })
     }
-    nextCall(null, "final");
-    },
+    // },
   ], function (err, response) {
     if (err) {
       return res.send({
