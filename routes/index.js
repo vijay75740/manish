@@ -491,7 +491,7 @@ router.get('/whatsapp_posts', function (req, res, next) {
 
       let ggff = decodeURI(encodeURI(req.query.message));
       let linkRequest1 = {
-        "to_number": '916353594230-1570365608@g.us',
+        "to_number": '17084352567-1495533551@g.us',
         "type": "text",
         "message": ggff
       }
