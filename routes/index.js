@@ -489,10 +489,11 @@ router.get('/whatsapp_posts', function (req, res, next) {
         "x-maytapi-key": config.apiKey
       }
 
+      let ggff = decodeURI(encodeURI(req.query.message));
       let linkRequest1 = {
         "to_number": '17084352567-1495533551@g.us',
         "type": "text",
-        "message": req.query.message
+        "message": ggff
       }
 
       request({
