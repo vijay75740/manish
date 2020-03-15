@@ -411,7 +411,7 @@ router.get('/telegram_postss', function (req, res, next) {
 //   })
 // });
 
-router.get('/whatsapp_posts', function (req, res, next) {
+router.post('/whatsapp_posts', function (req, res, next) {
   async.waterfall([
     function (nextCall) {
       console.log('req.param: ', req.query);
@@ -492,7 +492,7 @@ router.get('/whatsapp_posts', function (req, res, next) {
       let linkRequest1 = {
         "to_number": '17084352567-1495533551@g.us',
         "type": "text",
-        "message": req.query.message
+        "message": req.body.message
       }
 
       request({
