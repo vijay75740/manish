@@ -328,7 +328,7 @@ router.get('/whatsapp_posts', function (req, res, next) {
         nextCall(null, "demo");
       }
 
-    },function (body,nextCall) {
+    },function (bodyss,nextCall) {
       let arrayGroupNumber =[
         {
           "name": "Amazon Offer Alert - 1🛍🛒🔥",
@@ -394,7 +394,7 @@ router.get('/whatsapp_posts', function (req, res, next) {
         let link = JSON.parse(body);
       })
     }
-    nextCall(null, "final");
+    nextCall(null,bodyss);
     },
   ], function (err, response) {
     if (err) {
