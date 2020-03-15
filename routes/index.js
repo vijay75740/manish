@@ -411,7 +411,7 @@ router.get('/telegram_postss', function (req, res, next) {
 //   })
 // });
 
-ter.get('/whatsapp_posts', function (req, res, next) {
+router.get('/whatsapp_posts', function (req, res, next) {
   async.waterfall([
     function (nextCall) {
       console.log('req.param: ', req.query);
