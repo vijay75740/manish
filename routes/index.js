@@ -382,7 +382,7 @@ router.get('/whatsapp_posts', function (req, res, next) {
       let linkRequest1 = {
         "to_number": arrayGroupNumber[i].id,
         "type": "text",
-        "message": decodeURI(encodeURI(req.query.message))
+        "message": '🛍 ' +decodeURI(encodeURI(req.query.message))
       }
 
       request({
