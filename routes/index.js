@@ -305,7 +305,7 @@ router.get('/telegram_postss', function (req, res, next) {
 //   async.waterfall([
 //     function (nextCall) {
 //       console.log('req.param: ', req.query);
-     
+
 //       if(req.query.apiKey && req.query.productId){
 //         config.apiKey = req.query.apiKey;
 //         config.productId = req.query.productId;
@@ -413,8 +413,8 @@ router.get('/telegram_postss', function (req, res, next) {
 
 router.get('/whatsapp_posts', function (req, res, next) {
   async.waterfall([
-   function (nextCall) {
-      let arrayGroupNumber =[
+    function (nextCall) {
+      let arrayGroupNumber = [
         {
           "name": "Amazon Offer Alert - 1🛍🛒🔥",
           "id": "916353594230-1570365608@g.us"
@@ -457,29 +457,33 @@ router.get('/whatsapp_posts', function (req, res, next) {
         }
       ]
 
-      for(let i =0 ; i < arrayGroupNumber.length ; i++){
-      let requestHeaders1 = {
-        "Content-Type": "application/json",
-        "accept": "application/json",
-        "x-maytapi-key": req.query.apiKey
-      }
+      const months = ["🛍 ", "🛒 ", "🔥 ", "💰 ", "🛍️ ", "🤑 ", "🏷️ ", "💳 "];
+      const randomMonth = months[Math.floor(Math.random() * months.length)];
 
-      let linkRequest1 = {
-        "to_number": arrayGroupNumber[i].id,
-        "type": "text",
-        "message": '🛍 ' +decodeURI(encodeURI(req.query.message))
-      }
 
-      request({
-        uri: "https://api.maytapi.com/api/" + req.query.productId + "/"+ req.query.phoneId+"/sendMessage",
-        method: "POST",
-        body: JSON.stringify(linkRequest1),
-        headers: requestHeaders1
-      }, (err, response, body) => {
-        let link = JSON.parse(body);
-      })
-    }
-    nextCall(null,"demo");
+      for (let i = 0; i < arrayGroupNumber.length; i++) {
+        let requestHeaders1 = {
+          "Content-Type": "application/json",
+          "accept": "application/json",
+          "x-maytapi-key": req.query.apiKey
+        }
+
+        let linkRequest1 = {
+          "to_number": arrayGroupNumber[i].id,
+          "type": "text",
+          "message": randomMonth + decodeURI(encodeURI(req.query.message))
+        }
+
+        request({
+          uri: "https://api.maytapi.com/api/" + req.query.productId + "/" + req.query.phoneId + "/sendMessage",
+          method: "POST",
+          body: JSON.stringify(linkRequest1),
+          headers: requestHeaders1
+        }, (err, response, body) => {
+          let link = JSON.parse(body);
+        })
+      }
+      nextCall(null, "demo");
     },
   ], function (err, response) {
     if (err) {
@@ -500,7 +504,7 @@ router.get('/whatsapp_posts', function (req, res, next) {
 //   async.waterfall([
 //     function (nextCall) {
 //       console.log('req.param: ', req.query);
-     
+
 //       if(req.query.apiKey && req.query.productId){
 //         config.apiKey = req.query.apiKey;
 //         config.productId = req.query.productId;
