@@ -411,95 +411,6 @@ router.get('/telegram_postss', function (req, res, next) {
 //   })
 // });
 
-// router.get('/whatsapp_posts', function (req, res, next) {
-//   async.waterfall([
-//     function (nextCall) {
-//       let arrayGroupNumber = [
-//         {
-//           "name": "Amazon Offer Alert - 1🛍🛒🔥",
-//           "id": "916353594230-1570365608@g.us"
-//         },
-//         {
-//           "name": "Amazon Offer Alert - 2🛍🛒🔥",
-//           "id": "916353594230-1570379159@g.us"
-//         },
-//         {
-//           "name": "Amazon Offer Alert - 3🛍🛒🔥",
-//           "id": "916353594230-1570969831@g.us"
-//         },
-//         {
-//           "name": "Amazon Offer Alert - 4🛍🛒🔥",
-//           "id": "916353594230-1570971252@g.us"
-//         },
-//         {
-//           "name": "Amazon Offer Alert -5🛍🛒🔥",
-//           "id": "916353594230-1571493437@g.us"
-//         },
-//         {
-//           "name": "Amazon Offer Alert - 6🛍🛒🔥",
-//           "id": "916353594230-1571491746@g.us"
-//         },
-//         {
-//           "name": "Amazon Offer Alert - 7🛍🛒🔥",
-//           "id": "916353594230-1571491944@g.us"
-//         },
-//         {
-//           "name": "Amazon Offer Alert - 8🛍🛒🔥",
-//           "id": "916353594230-1571493106@g.us"
-//         },
-//         {
-//           "name": "Amazon Offer Alert - 9🛍🛒🔥",
-//           "id": "916353594230-1571493284@g.us"
-//         },
-//         {
-//           "name": "Amazon Offer Alert -10🛍🛒🔥",
-//           "id": "916353594230-1574959445@g.us"
-//         }
-//       ]
-
-//       const months = ["🛍 ", "🛒 ", "🔥 ", "💰 ", "🛍️ ", "🤑 ", "🏷️ ", "💳 ", "🎟️ "];
-//       const randomMonth = months[Math.floor(Math.random() * months.length)];
-
-
-//       for (let i = 0; i < arrayGroupNumber.length; i++) {
-//         let requestHeaders1 = {
-//           "Content-Type": "application/json",
-//           "accept": "application/json",
-//           "x-maytapi-key": req.query.apiKey
-//         }
-
-//         let linkRequest1 = {
-//           "to_number": arrayGroupNumber[i].id,
-//           "type": "text",
-//           "message": randomMonth + decodeURI(encodeURI(req.query.message))
-//         }
-
-//         request({
-//           uri: "https://api.maytapi.com/api/" + req.query.productId + "/" + req.query.phoneId + "/sendMessage",
-//           method: "POST",
-//           body: JSON.stringify(linkRequest1),
-//           headers: requestHeaders1
-//         }, (err, response, body) => {
-//           let link = JSON.parse(body);
-//         })
-//       }
-//       nextCall(null, "demo");
-//     },
-//   ], function (err, response) {
-//     if (err) {
-//       return res.send({
-//         status: err.code ? err.code : 400,
-//         message: (err && err.msg) || "someyhing went wrong"
-//       });
-//     }
-//     return res.send({
-//       status_code: 200,
-//       message: "telegrame post create sucessfully",
-//       data: response
-//     });
-//   })
-// });
-
 router.get('/whatsapp_posts', function (req, res, next) {
   async.waterfall([
     function (nextCall) {
@@ -554,15 +465,17 @@ router.get('/whatsapp_posts', function (req, res, next) {
         let requestHeaders1 = {
           "Content-Type": "application/json",
           "accept": "application/json",
+          "x-maytapi-key": req.query.apiKey
         }
 
         let linkRequest1 = {
-            "chatId": arrayGroupNumber[i].id,
-            "body": randomMonth + decodeURI(encodeURI(req.query.message))
+          "to_number": arrayGroupNumber[i].id,
+          "type": "text",
+          "message": randomMonth + decodeURI(encodeURI(req.query.message))
         }
 
         request({
-          uri: "https://api.chat-api.com/instance109074/sendMessage?token=0xh48oclbsfv3zu3&_ga=2.130264071.962361358.1584778333-1227591583.1584778333",
+          uri: "https://api.maytapi.com/api/" + req.query.productId + "/" + req.query.phoneId + "/sendMessage",
           method: "POST",
           body: JSON.stringify(linkRequest1),
           headers: requestHeaders1
@@ -586,6 +499,93 @@ router.get('/whatsapp_posts', function (req, res, next) {
     });
   })
 });
+
+// router.get('/whatsapp_posts', function (req, res, next) {
+//   async.waterfall([
+//     function (nextCall) {
+//       let arrayGroupNumber = [
+//         {
+//           "name": "Amazon Offer Alert - 1🛍🛒🔥",
+//           "id": "916353594230-1570365608@g.us"
+//         },
+//         {
+//           "name": "Amazon Offer Alert - 2🛍🛒🔥",
+//           "id": "916353594230-1570379159@g.us"
+//         },
+//         {
+//           "name": "Amazon Offer Alert - 3🛍🛒🔥",
+//           "id": "916353594230-1570969831@g.us"
+//         },
+//         {
+//           "name": "Amazon Offer Alert - 4🛍🛒🔥",
+//           "id": "916353594230-1570971252@g.us"
+//         },
+//         {
+//           "name": "Amazon Offer Alert -5🛍🛒🔥",
+//           "id": "916353594230-1571493437@g.us"
+//         },
+//         {
+//           "name": "Amazon Offer Alert - 6🛍🛒🔥",
+//           "id": "916353594230-1571491746@g.us"
+//         },
+//         {
+//           "name": "Amazon Offer Alert - 7🛍🛒🔥",
+//           "id": "916353594230-1571491944@g.us"
+//         },
+//         {
+//           "name": "Amazon Offer Alert - 8🛍🛒🔥",
+//           "id": "916353594230-1571493106@g.us"
+//         },
+//         {
+//           "name": "Amazon Offer Alert - 9🛍🛒🔥",
+//           "id": "916353594230-1571493284@g.us"
+//         },
+//         {
+//           "name": "Amazon Offer Alert -10🛍🛒🔥",
+//           "id": "916353594230-1574959445@g.us"
+//         }
+//       ]
+
+//       const months = ["🛍 ", "🛒 ", "🔥 ", "💰 ", "🛍️ ", "🤑 ", "🏷️ ", "💳 ", "🎟️ "];
+//       const randomMonth = months[Math.floor(Math.random() * months.length)];
+
+
+//       for (let i = 0; i < arrayGroupNumber.length; i++) {
+//         let requestHeaders1 = {
+//           "Content-Type": "application/json",
+//           "accept": "application/json",
+//         }
+
+//         let linkRequest1 = {
+//             "chatId": arrayGroupNumber[i].id,
+//             "body": randomMonth + decodeURI(encodeURI(req.query.message))
+//         }
+
+//         request({
+//           uri: "https://api.chat-api.com/instance109074/sendMessage?token=0xh48oclbsfv3zu3&_ga=2.130264071.962361358.1584778333-1227591583.1584778333",
+//           method: "POST",
+//           body: JSON.stringify(linkRequest1),
+//           headers: requestHeaders1
+//         }, (err, response, body) => {
+//           let link = JSON.parse(body);
+//         })
+//       }
+//       nextCall(null, "demo");
+//     },
+//   ], function (err, response) {
+//     if (err) {
+//       return res.send({
+//         status: err.code ? err.code : 400,
+//         message: (err && err.msg) || "someyhing went wrong"
+//       });
+//     }
+//     return res.send({
+//       status_code: 200,
+//       message: "telegrame post create sucessfully",
+//       data: response
+//     });
+//   })
+// });
 
 // router.get('/whatsapp_posts', function (req, res, next) {
 //   async.waterfall([
