@@ -402,8 +402,12 @@ router.get('/automation_posts', function (req, res, next) {
              console.log('array: ', array);
               for (let j = 0; j < array.length; j++) {
                 if(array[j].match(/(((ftp|https?):\/\/)[\-\w@:%_\+.~#?,&\/\/=]+)/g)){
-                   xzhxzh = array[j].replace(/[[\]]/g,'').replace(/ /g, '@')
-                  console.log('array[j]: ', array[j]);
+                    if(array[j].match(/amazon.in/g)){
+                     var xzhxzh = array[j].replace(/[[\]]/g,'').replace(/ /g, '@')
+                    }else{
+                    var xzhxzh = array[j]
+                    }
+                  console.log('xzhxzh: ', xzhxzh);
                   let urls = xzhxzh.match(/(((ftp|https?):\/\/)[\-\w@:%_\+.~#?,&\/\/=]+)/g)
                   console.log('urls: ', urls);
                      tall(urls[0])
@@ -418,8 +422,9 @@ router.get('/automation_posts', function (req, res, next) {
                           let response =await bitly.shorten(dddd);
                           console.log(`Your shortened bitlink is ${response.link}`);
                       console.log('array[j]---: ', array[j]);
-                      console.log('urls[0]: ', urls[0]);
-                        final[j] = array[j].replace(urls[0].replace(/@/g, ' '),response.link).replace(/.#x...../g,'%F0%9F%8E%B8');
+                      console.log('urls[0]: ', "["+urls[0].replace(/@/g, ' ').trim()+"]");
+                        final[j] = array[j].replace("["+urls[0].replace(/@/g, ' ').trim()+"]",response.link).replace(/.#x...../g,'%F0%9F%8E%B8');
+                        console.log('final[j]: ', final[j]);
                         
                       }
                     // }else{
@@ -760,24 +765,16 @@ router.get('/automation_posts', function (req, res, next) {
 router.get('/allinoneapp', function (req, res, next) {
   async.waterfall([
     function (nextCall) {
-       
     let sqlss = "SELECT * FROM all_in_one ";
-              console.log('sqlss: ', sqlss);
-              connection.query(sqlss, function (err, rides) {
-                if (err) {
-                  return nextCall({
-                    "message": "something went wrong",
-                  });
-                }
-                finalres = {
-                  "Daily Deals": {
-                    "categoryId": "Daily Deals",
-                    "categoryName": "Daily Deals",
-                    "data": rides
-                  }
-                }
-        nextCall(null,finalres);
-              })
+      console.log('sqlss: ', sqlss);
+      connection.query(sqlss, function (err, rides) {
+        if (err) {
+          return nextCall({
+            "message": "something went wrong",
+          });
+        }
+      nextCall(null,rides);
+      })
     },
   ], function (err, response) {
     if (err) {
@@ -787,7 +784,7 @@ router.get('/allinoneapp', function (req, res, next) {
       });
     }
     return res.send({
-      Category: response
+      data: response
     });
   })
 });
