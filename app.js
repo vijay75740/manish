@@ -7,22 +7,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var expressValidator = require('express-validator');
 var express = require('express');
-var mysql  = require('mysql');
 
-var connection = mysql.createConnection({
-  host     : 'https://www.db4free.net/phpMyAdmin/',
-  user     : 'vijay123',
-  password : 'vijay@123',
-  database:'automation_post1'
-});
- 
-connection.connect(function(err) {
-  if (err) {
-    console.error('error connecting: ');
-    return;
-  }
-  console.log('connected as id ' );
-});
 var app = express();
 
 // view engine setup
