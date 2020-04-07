@@ -902,94 +902,201 @@ router.get('/allinoneapp', function (req, res, next) {
 //   })
 // });
 
-// router.get('/whatsapp_posts', function (req, res, next) {
-//   async.waterfall([
-//     function (nextCall) {
-//       let arrayGroupNumber = [
-//         {
-//           "name": "Amazon Offer Alert - 1🛍🛒🔥",
-//           "id": "916353594230-1570365608@g.us"
-//         },
-//         {
-//           "name": "Amazon Offer Alert - 2🛍🛒🔥",
-//           "id": "916353594230-1570379159@g.us"
-//         },
-//         {
-//           "name": "Amazon Offer Alert - 3🛍🛒🔥",
-//           "id": "916353594230-1570969831@g.us"
-//         },
-//         {
-//           "name": "Amazon Offer Alert - 4🛍🛒🔥",
-//           "id": "916353594230-1570971252@g.us"
-//         },
-//         {
-//           "name": "Amazon Offer Alert -5🛍🛒🔥",
-//           "id": "916353594230-1571493437@g.us"
-//         },
-//         {
-//           "name": "Amazon Offer Alert - 6🛍🛒🔥",
-//           "id": "916353594230-1571491746@g.us"
-//         },
-//         {
-//           "name": "Amazon Offer Alert - 7🛍🛒🔥",
-//           "id": "916353594230-1571491944@g.us"
-//         },
-//         {
-//           "name": "Amazon Offer Alert - 8🛍🛒🔥",
-//           "id": "916353594230-1571493106@g.us"
-//         },
-//         {
-//           "name": "Amazon Offer Alert - 9🛍🛒🔥",
-//           "id": "916353594230-1571493284@g.us"
-//         },
-//         {
-//           "name": "Amazon Offer Alert -10🛍🛒🔥",
-//           "id": "916353594230-1574959445@g.us"
-//         }
-//       ]
+router.get('/whatsapp_posts1', function (req, res, next) {
+  async.waterfall([
+    function (nextCall) {
+      let arrayGroupNumber = [
+        {
+          "name": "Amazon Offer Alert - 1🛍🛒🔥",
+          "id": "916353594230-1570365608@g.us"
+        },
+        {
+          "name": "Amazon Offer Alert - 2🛍🛒🔥",
+          "id": "916353594230-1570379159@g.us"
+        },
+        {
+          "name": "Amazon Offer Alert - 3🛍🛒🔥",
+          "id": "916353594230-1570969831@g.us"
+        },
+        {
+          "name": "Amazon Offer Alert - 4🛍🛒🔥",
+          "id": "916353594230-1570971252@g.us"
+        },
+        {
+          "name": "Amazon Offer Alert -5🛍🛒🔥",
+          "id": "916353594230-1571493437@g.us"
+        },
+        {
+          "name": "Amazon Offer Alert - 6🛍🛒🔥",
+          "id": "916353594230-1571491746@g.us"
+        },
+        {
+          "name": "Amazon Offer Alert - 7🛍🛒🔥",
+          "id": "916353594230-1571491944@g.us"
+        },
+        {
+          "name": "Amazon Offer Alert - 8🛍🛒🔥",
+          "id": "916353594230-1571493106@g.us"
+        },
+        {
+          "name": "Amazon Offer Alert - 9🛍🛒🔥",
+          "id": "916353594230-1571493284@g.us"
+        },
+        {
+          "name": "Amazon Offer Alert -10🛍🛒🔥",
+          "id": "916353594230-1574959445@g.us"
+        },
+        {
+          "name": "Amazon Offer Alert - 11🛍🛒🔥",
+          "id": "916353594230-1574959195@g.us"
+        },
+        {
+          "name": "Amazon Offer Alert - 12🛍🛒🔥",
+          "id": "918160515625-1584094851@g.us"
+        }
+      ]
+      const months = ["🛍 ", "🛒 ", "🔥 ", "💰 ", "🛍️ ", "🤑 ", "🏷️ ", "💳 ", "🎟️ ","📦 ","😍 ","🕯 ","🍂 ","🎌 ","👑 ","🎊 ","🐦 ","⛄ "];
+      const randomMonth = months[Math.floor(Math.random() * months.length)];
 
-//       const months = ["🛍 ", "🛒 ", "🔥 ", "💰 ", "🛍️ ", "🤑 ", "🏷️ ", "💳 ", "🎟️ "];
-//       const randomMonth = months[Math.floor(Math.random() * months.length)];
+
+      for (let i = 0; i < arrayGroupNumber.length; i++) {
+        var ggff = req.query.message;
+        if(ggff != 'null' && ggff != 'undefined' ){
+        let requestHeaders1 = {
+          "Content-Type": "application/json",
+          "accept": "application/json",
+          "x-maytapi-key": req.query.apiKey
+        }
+
+        let linkRequest1 = {
+          "to_number": arrayGroupNumber[i].id,
+          "type": "text",
+          "message": randomMonth + req.query.message
+        }
+        request({
+          uri: "https://api.maytapi.com/api/" + req.query.productId + "/" + req.query.phoneId + "/sendMessage",
+          method: "POST",
+          body: JSON.stringify(linkRequest1),
+          headers: requestHeaders1
+        }, (err, response, body) => {
+          let link = JSON.parse(body);
+        })
+      }
+    }
+      nextCall(null, "demo");
+    },
+  ], function (err, response) {
+    if (err) {
+      return res.send({
+        status: err.code ? err.code : 400,
+        message: (err && err.msg) || "someyhing went wrong"
+      });
+    }
+    return res.send({
+      status_code: 200,
+      message: "telegrame post create sucessfully",
+      data: response
+    });
+  })
+});
+
+router.get('/whatsapp_posts2', function (req, res, next) {
+  async.waterfall([
+    function (nextCall) {
+    let arrayGroupNumber = [
+      {
+        "name": "Amazon Offer Alert - 13🛍🛒🔥",
+        "id": "916353594230-1584971104@g.us"
+      },
+      {
+        "name": "Amazon Offer Alert - 14🛍🛒🔥",
+        "id": "916353594230-1584971346@g.us"
+      },
+      {
+        "name": "Amazon Offer Alert -15🛍🛒🔥",
+        "id": "916353594230-1584971429@g.us"
+      },
+      {
+        "name": "Amazon Offer Alert - 16🛍🛒🔥",
+        "id": "916353594230-1584971505@g.us"
+      },
+      {
+        "name": "Amazon Offer Alert - 17🛍🛒🔥",
+        "id": "916353594230-1584971569@g.us"
+      },
+      {
+        "name": "Amazon Offer Alert - 18🛍🛒🔥",
+        "id": "916353594230-1584971645@g.us"
+      },
+      {
+        "name": "Amazon Offer Alert - 19🛍🛒🔥",
+        "id": "916353594230-1584971700@g.us"
+      },
+      {
+        "name": "Amazon Offer Alert -20🛍🛒🔥",
+        "id": "916353594230-1584971760@g.us"
+      },
+      {
+        "name": "Amazon Offer Alert - 21🛍🛒🔥",
+        "id": "916353594230-1585500064@g.us"
+      },
+      {
+        "name": "Amazon Offer Alert - 22🛍🛒🔥",
+        "id": "916353594230-1585500152@g.us"
+      },
+      {
+        "name": "Amazon Offer Alert - 23🛍🛒🔥",
+        "id": "916353594230-1585500294@g.us"
+      },
+      {
+        "name": "Amazon Offer Alert - 24🛍🛒🔥",
+        "id": "916353594230-1585500401@g.us"
+      }
+      ]
+      const months = ["🛍 ", "🛒 ", "🔥 ", "💰 ", "🛍️ ", "🤑 ", "🏷️ ", "💳 ", "🎟️ ","📦 ","😍 ","🕯 ","🍂 ","🎌 ","👑 ","🎊 ","🐦 ","⛄ "];
+      const randomMonth = months[Math.floor(Math.random() * months.length)];
 
 
-//       for (let i = 0; i < arrayGroupNumber.length; i++) {
-//         let requestHeaders1 = {
-//           "Content-Type": "application/json",
-//           "accept": "application/json",
-//           "x-maytapi-key": req.query.apiKey
-//         }
+      for (let i = 0; i < arrayGroupNumber.length; i++) {
+        var ggff = req.query.message;
+        if(ggff != 'null' && ggff != 'undefined' ){
+        let requestHeaders1 = {
+          "Content-Type": "application/json",
+          "accept": "application/json",
+          "x-maytapi-key": req.query.apiKey
+        }
 
-//         let linkRequest1 = {
-//           "to_number": arrayGroupNumber[i].id,
-//           "type": "text",
-//           "message": randomMonth + decodeURI(encodeURI(req.query.message))
-//         }
-
-//         request({
-//           uri: "https://api.maytapi.com/api/" + req.query.productId + "/" + req.query.phoneId + "/sendMessage",
-//           method: "POST",
-//           body: JSON.stringify(linkRequest1),
-//           headers: requestHeaders1
-//         }, (err, response, body) => {
-//           let link = JSON.parse(body);
-//         })
-//       }
-//       nextCall(null, "demo");
-//     },
-//   ], function (err, response) {
-//     if (err) {
-//       return res.send({
-//         status: err.code ? err.code : 400,
-//         message: (err && err.msg) || "someyhing went wrong"
-//       });
-//     }
-//     return res.send({
-//       status_code: 200,
-//       message: "telegrame post create sucessfully",
-//       data: response
-//     });
-//   })
-// });
+        let linkRequest1 = {
+          "to_number": arrayGroupNumber[i].id,
+          "type": "text",
+          "message": randomMonth + req.query.message
+        }
+        request({
+          uri: "https://api.maytapi.com/api/" + req.query.productId + "/" + req.query.phoneId + "/sendMessage",
+          method: "POST",
+          body: JSON.stringify(linkRequest1),
+          headers: requestHeaders1
+        }, (err, response, body) => {
+          let link = JSON.parse(body);
+        })
+      }
+    }
+      nextCall(null, "demo1");
+    },
+  ], function (err, response) {
+    if (err) {
+      return res.send({
+        status: err.code ? err.code : 400,
+        message: (err && err.msg) || "someyhing went wrong"
+      });
+    }
+    return res.send({
+      status_code: 200,
+      message: "telegrame post create sucessfully",
+      data: response
+    });
+  })
+});
 
 // router.get('/whatsapp_posts', function (req, res, next) {
 //   async.waterfall([
@@ -1561,6 +1668,7 @@ router.get('/whatsapp_posts', function (req, res, next) {
     });
   })
 });
+
 // router.get('/whatsapp_posts', function (req, res, next) {
 //   async.waterfall([
 //     function (nextCall) {
