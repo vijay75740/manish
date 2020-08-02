@@ -759,16 +759,27 @@ router.get('/automation_posts', function (req, res, next) {
 router.get('/allinoneapp', function (req, res, next) {
   async.waterfall([
     function (nextCall) {
-   request({
-        uri: "https://postmanualdemo1.herokuapp.com/allinoneappPoster",
-        method: "GET",
-      }, (err, response, body) => {
+//    request({
+//         uri: "https://postmanualdemo1.herokuapp.com/allinoneappPoster",
+//         method: "GET",
+//       }, (err, response, body) => {
+//         if (err) {
+//           return nextCall({
+//             "message": "something went wrong",
+//           });
+//         }
+//       nextCall(null,JSON.parse(body));
+//       })
+      
+       let sqlss = "SELECT * FROM all_in_one ";
+      console.log('sqlss: ', sqlss);
+      connection.query(sqlss, function (err, rides) {
         if (err) {
           return nextCall({
             "message": "something went wrong",
           });
         }
-      nextCall(null,JSON.parse(body));
+      nextCall(null,rides);
       })
     },
   ], function (err, response) {
